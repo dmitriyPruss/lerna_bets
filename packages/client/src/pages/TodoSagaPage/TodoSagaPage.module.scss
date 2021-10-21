@@ -1,0 +1,105 @@
+@import './../../common/styles/vars';
+@import './../../common/styles/templates';
+
+:root {
+  font-size: 16px;
+}
+
+.themeButton {
+  position: fixed;
+  top: 3px;
+  left: 3px;
+}
+
+.containerLight,
+.containerDark {
+  @extend %containerSets;
+}
+
+.containerLight {
+  background: rgb(198, 248, 241);
+}
+
+.containerDark {
+  background: rgb(79, 81, 94);
+}
+
+.headerLight,
+.headerDark {
+  @extend %headerSets;
+}
+
+.headerLight {
+  color: rgb(253, 253, 253);
+  text-shadow: $lightTextShadow;
+}
+
+.headerDark {
+  text-shadow: $darkTextShadow;
+}
+
+.itemsContainer {
+  @extend %itemsContainerSets;
+
+  @media screen and (max-width: 900px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 85%;
+  }
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 95%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 98%;
+  }
+}
+
+.inputData {
+  margin-bottom: 30px;
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    width: 90%;
+  }
+}
+
+.listItemLight,
+.listItemDark {
+  @extend %listItemSets;
+
+  & > span {
+    @extend %listItemTextSets;
+  }
+
+  & > button {
+    margin: 0 5px 0 auto;
+  }
+}
+
+.listItemLight {
+  background: $lightBack;
+  border: 2px outset rgb(28, 122, 102);
+
+  & > span {
+    background-color: rgb(8, 19, 16);
+    text-shadow: rgba(90, 233, 199, 0.808) 0px 3px 3px;
+  }
+}
+
+.listItemDark {
+  background: $darkBack;
+  border: 2px double rgb(253, 253, 253);
+
+  & > span {
+    background-color: #161414;
+    text-shadow: rgba(141, 136, 136, 0.904) 0px 3px 3px;
+  }
+}
