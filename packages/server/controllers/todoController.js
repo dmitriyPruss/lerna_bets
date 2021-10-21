@@ -22,7 +22,7 @@ module.exports.createTodo = async (req, res, next) => {
 
   try {
     const createdTodo = await Todo.create(body);
-    const sendedTodo = _.omit(ccreatedTodo.get(), [
+    const sendedTodo = _.omit(createdTodo.get(), [
       'id',
       'createdAt',
       'updatedAt'
