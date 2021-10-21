@@ -3,6 +3,6 @@ const todoRouter = require('./routes/todoRouter');
 
 const router = Router();
 
-router.use('/todos', todoRouter);
+router.use('/tasks', todoRouter);
 
 module.exports = router;

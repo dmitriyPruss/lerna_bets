@@ -28,6 +28,8 @@ module.exports.getTodos = async (req, res, next) => {
 module.exports.createTodo = async (req, res, next) => {
   const { body } = req;
 
+  console.log(`body`, body);
+
   try {
     const createdTodo = await Todo.create(body);
     const sendedTodo = _.omit(createdTodo.get(), [
@@ -44,13 +46,13 @@ module.exports.createTodo = async (req, res, next) => {
 
 module.exports.changeTodo = async (req, res, next) => {
   const {
-    params: { todoId },
+    params: { taskId },
     body
   } = req;
 
   try {
     const [updatedTodoCount, [updatedTodoData]] = await Todo.update(body, {
-      where: { id: todoId },
+      where: { id: taskId },
       returning: true
     });
 
@@ -70,11 +72,11 @@ module.exports.changeTodo = async (req, res, next) => {
 
 module.exports.deleteTodo = async (req, res, next) => {
   const {
-    params: { todoId }
+    params: { taskId }
   } = req;
 
   try {
-    const deletedTodoCount = await Todo.destroy({ where: { id: todoId } });
+    const deletedTodoCount = await Todo.destroy({ where: { id: taskId } });
 
     deletedTodoCount
       ? res.status(204).send()
