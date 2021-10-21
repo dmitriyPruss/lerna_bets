@@ -10,7 +10,7 @@ Content-Type: application/json
 
 # READ #
 ###
-GET http://localhost:5000/api/todos HTTP/1.1
+GET http://localhost:5000/api/todos?page=2&items=3 HTTP/1.1
 
 
 # UPDATE #

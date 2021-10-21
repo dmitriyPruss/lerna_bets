@@ -3,12 +3,20 @@ const _ = require('lodash');
 const { Todo } = require('./../models');
 
 module.exports.getTodos = async (req, res, next) => {
+  const {
+    pagination: { limit, offset }
+  } = req;
+
+  console.log(`req.pagination`, req.pagination);
+
   try {
     const foundTodos = await Todo.findAll({
       raw: true,
       attributes: {
         exclude: ['createdAt', 'updatedAt']
-      }
+      },
+      limit,
+      offset
     });
 
     res.status(200).send({ data: foundTodos });

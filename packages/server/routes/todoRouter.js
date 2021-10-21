@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const { todoController } = require('../controllers');
+const { paginate } = require('./../middleware');
 
 const todoRouter = Router();
 
 todoRouter
   .route('/')
-  .get(todoController.getTodos)
+  .get(paginate.paginateTodos, todoController.getTodos)
   .post(todoController.createTodo);
 
 todoRouter
