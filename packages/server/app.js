@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./router');
-const { errorHandlersMw } = require('./middleware');
+const { errorHandlers } = require('./middleware');
 
 const app = express();
 
@@ -11,9 +11,9 @@ app.use(express.json());
 app.use('/api', router);
 
 app.use(
-  errorHandlersMw.validateErrHandler,
-  errorHandlersMw.sequelizeErrHandler,
-  errorHandlersMw.commonErrHandler
+  errorHandlers.validateErrHandler,
+  errorHandlers.sequelizeErrHandler,
+  errorHandlers.commonErrHandler
 );
 
 module.exports = app;

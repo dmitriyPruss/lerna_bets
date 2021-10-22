@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const {
   NEW_TASK_VALID_SCHEMA,
   CHANGED_TASK_VALID_SCHEMA
-} = require('./../utils/validationSchema');
+} = require('../utils/validationSchema');
 
 module.exports.validateNewTask = async (req, res, next) => {
   try {

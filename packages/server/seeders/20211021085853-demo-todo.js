@@ -1,18 +1,18 @@
 'use strict';
-const todoData = require('./../initialDbData/todos.json');
+const taskData = require('./../initialDbData/tasks.json');
 
-const todos = todoData.map(todo => ({
-  ...todo,
+const tasks = taskData.map(task => ({
+  ...task,
   createdAt: new Date(),
   updatedAt: new Date()
 }));
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Todos', todos, {});
+    await queryInterface.bulkInsert('Tasks', tasks, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Todos', null, {});
+    await queryInterface.bulkDelete('Tasks', null, {});
   }
 };

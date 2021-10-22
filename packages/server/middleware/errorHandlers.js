@@ -1,6 +1,6 @@
 const {
   Sequelize: { BaseError }
-} = require('./../models');
+} = require('../models');
 
 module.exports.validateErrHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
