@@ -122,16 +122,16 @@ function tasksSagaReducer (state = initialState, action) {
       };
     }
     case ACTION_TYPES.UPDATE_TASK_SUCCESS: {
-      const { id } = action;
+      const { task } = action;
       const { tasks } = state;
 
-      const newTasks = tasks.map(task => {
-        if (task.id === id) {
-          task.isDone = !task.isDone;
-        }
+      const newTasks = [...tasks];
 
-        return task;
-      });
+      newTasks.splice(
+        newTasks.findIndex(newTask => newTask.id === task.id),
+        1,
+        task
+      );
 
       return {
         ...state,

@@ -47,25 +47,31 @@ module.exports.createTask = async (req, res, next) => {
 
 module.exports.changeTask = async (req, res, next) => {
   const {
-    params: { taskId }
+    params: { taskId },
+    body
   } = req;
 
-  try {
-    const changedTask = await Task.findByPk(taskId);
-    changedTask.isDone = !changedTask.isDone;
+  console.log(`body`, body);
+  console.log(`taskId`, taskId);
 
-    console.log(`changedTask`, changedTask.get());
-    const [updatedTaskCount] = await Task.update(changedTask.get(), {
-      where: { id: taskId }
+  body.isDone = !body.isDone;
+  console.log(`body changed`, body);
+
+  try {
+    const [updatedTaskCount, [updatedTask]] = await Task.update(body, {
+      where: { id: taskId },
+      returning: true
     });
 
-    if (updatedTaskCount) {
-      return res.status(204).send();
-    }
+    console.log(`updatedTask.get()`, updatedTask.get());
 
+    if (updatedTaskCount > 0) {
+      const changedTask = _.omit(updatedTask.get(), ['createdAt', 'updatedAt']);
+      return res.status(200).send({ data: changedTask });
+    }
     next(createError(404, 'Not Found'));
-  } catch (error) {
-    next(error);
+  } catch (e) {
+    next(e);
   }
 };
 
@@ -81,9 +87,10 @@ module.exports.deleteTask = async (req, res, next) => {
 
     console.log(`deletedTaskCount `, deletedTaskCount);
 
-    deletedTaskCount
-      ? res.status(204).send()
-      : next(createError(404, 'Not Found'));
+    if (deletedTaskCount) {
+      return res.status(204).send();
+    }
+    next(createError(404, 'Not Found'));
   } catch (error) {
     next(error);
   }

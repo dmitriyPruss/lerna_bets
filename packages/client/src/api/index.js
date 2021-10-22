@@ -10,8 +10,6 @@ export const createTask = task => apiInstance.post('/tasks', task);
 
 export const getTasks = () => apiInstance.get('/tasks');
 
-// 'http://127.0.0.1:5000/api/tasks/id
-export const updateTask = id => apiInstance.patch(`/tasks/${id}`);
+export const updateTask = (id, task) => apiInstance.patch(`/tasks/${id}`, task);
 
-// 'http://127.0.0.1:5000/api/tasks/id'
 export const deleteTask = id => apiInstance.delete(`/tasks/${id}`);

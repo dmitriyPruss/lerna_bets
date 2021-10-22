@@ -15,13 +15,9 @@ module.exports.validateNewTask = async (req, res, next) => {
 };
 
 module.exports.validateChangedTask = async (req, res, next) => {
-  try {
-    if (await CHANGED_TASK_VALID_SCHEMA.isValid(req.body)) {
-      return next();
-    }
-
-    next(createError(422, 'Validation Error'));
-  } catch (error) {
-    next(error);
+  if (await CHANGED_TASK_VALID_SCHEMA.isValid(req.body)) {
+    return next();
   }
+
+  next(createError(422, 'Validation Error'));
 };

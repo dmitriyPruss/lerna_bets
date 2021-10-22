@@ -1,18 +1,5 @@
 import ACTION_TYPES from './actionTypes';
 
-export const addTask = data => ({ type: ACTION_TYPES.ADD_TASK, data });
-
-export const deleteTask = id => ({
-  type: ACTION_TYPES.DELETE_TASK,
-  id
-});
-
-export const checkTask = changedInfo => ({
-  type: ACTION_TYPES.CHECK_TASK,
-  changedInfo
-});
-
-//SAGA
 // Create:
 export const createTaskAction = task => ({
   type: ACTION_TYPES.CREATE_TASK_ACTION,
@@ -73,18 +60,19 @@ export const deleteTaskError = error => ({
 });
 
 //Update:
-export const updateTaskAction = id => ({
+export const updateTaskAction = (id, task) => ({
   type: ACTION_TYPES.UPDATE_TASK_ACTION,
-  id
+  id,
+  task
 });
 
 export const updateTaskRequest = () => ({
   type: ACTION_TYPES.UPDATE_TASK_REQUEST
 });
 
-export const updateTaskSuccess = id => ({
+export const updateTaskSuccess = task => ({
   type: ACTION_TYPES.UPDATE_TASK_SUCCESS,
-  id
+  task
 });
 
 export const updateTaskError = error => ({

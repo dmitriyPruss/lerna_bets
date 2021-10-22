@@ -17,9 +17,14 @@ function TasksSagaList (props) {
     getTasks();
   }, []);
 
-  const mapTask = ({ id, description, isDone }, index) => {
+  const mapTask = (task, index) => {
+    const { id, description, isDone } = task;
+
     const checkTaskHandler = () => {
-      updateTask(id);
+      // console.log('checkTaskHandler task :>> ', task);
+      // console.log('checkTaskHandler id :>> ', id);
+
+      updateTask(id, task);
     };
 
     const deleteTaskHandler = () => {
@@ -43,17 +48,6 @@ function TasksSagaList (props) {
 
   return (
     <>
-      {isFetching && (
-        <div
-          style={{
-            fontSize: '22px',
-            color: 'blue',
-            textShadow: '3px 3px 7px darkblue'
-          }}
-        >
-          Loading...
-        </div>
-      )}
       {error && (
         <div
           style={{
@@ -77,8 +71,8 @@ const mapDispatchToProps = dispatch => {
     deleteTask: id => {
       dispatch(actionCreators.deleteTaskAction(id));
     },
-    updateTask: id => {
-      dispatch(actionCreators.updateTaskAction(id));
+    updateTask: (id, task) => {
+      dispatch(actionCreators.updateTaskAction(id, task));
     }
   };
 };

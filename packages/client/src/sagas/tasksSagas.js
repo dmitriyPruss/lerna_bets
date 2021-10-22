@@ -58,13 +58,15 @@ export function * deleteTaskSaga (action) {
 }
 
 export function * updateTaskSaga (action) {
-  const { id } = action;
+  const { id, task } = action;
 
   yield put(updateTaskRequest());
 
   try {
-    yield API.updateTask(id);
-    yield put(updateTaskSuccess(id));
+    const {
+      data: { data: changedTask }
+    } = yield API.updateTask(id, task);
+    yield put(updateTaskSuccess(changedTask));
   } catch (error) {
     yield put(updateTaskError(error));
   }

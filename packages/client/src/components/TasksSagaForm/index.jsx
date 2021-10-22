@@ -1,7 +1,6 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
 import Input from '../../components/Input';
-import { INPUT_SCHEMA } from './../../utils/validatingSchemas';
 import { createTaskAction } from './../../actions';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -23,7 +22,6 @@ function TasksSagaForm (props) {
     <>
       <Formik
         initialValues={{ description: '', isDone: false }}
-        validationSchema={INPUT_SCHEMA}
         onSubmit={addTaskHandler}
       >
         {formikProps => {
