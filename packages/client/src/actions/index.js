@@ -62,9 +62,9 @@ export const deleteTaskRequest = () => ({
   type: ACTION_TYPES.DELETE_TASK_REQUEST
 });
 
-export const deleteTaskSuccess = deletedTask => ({
+export const deleteTaskSuccess = id => ({
   type: ACTION_TYPES.DELETE_TASK_SUCCESS,
-  deletedTask
+  id
 });
 
 export const deleteTaskError = error => ({
@@ -82,9 +82,9 @@ export const updateTaskRequest = () => ({
   type: ACTION_TYPES.UPDATE_TASK_REQUEST
 });
 
-export const updateTaskSuccess = newTasks => ({
+export const updateTaskSuccess = id => ({
   type: ACTION_TYPES.UPDATE_TASK_SUCCESS,
-  newTasks
+  id
 });
 
 export const updateTaskError = error => ({

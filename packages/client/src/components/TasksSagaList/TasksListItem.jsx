@@ -5,6 +5,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 function TasksListItem (props) {
   const {
     description,
+    isDone,
     theme,
     checkTaskHandler,
     deleteTaskHandler,
@@ -13,7 +14,11 @@ function TasksListItem (props) {
 
   return (
     <li className={theme ? listItemLight : listItemDark}>
-      <input type='checkbox' onClick={checkTaskHandler} />
+      <input
+        defaultChecked={isDone ? true : false}
+        type='checkbox'
+        onClick={checkTaskHandler}
+      />
       <span>{description}</span>
       <Button
         variant={theme ? 'outline-success' : 'outline-light'}

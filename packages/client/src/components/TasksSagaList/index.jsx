@@ -17,7 +17,7 @@ function TasksSagaList (props) {
     getTasks();
   }, []);
 
-  const mapTask = ({ id, description }, index) => {
+  const mapTask = ({ id, description, isDone }, index) => {
     const checkTaskHandler = () => {
       updateTask(id);
     };
@@ -26,10 +26,13 @@ function TasksSagaList (props) {
       deleteTask(id);
     };
 
+    console.log('isDone :>> ', isDone);
+
     return (
       <TasksListItem
         key={id}
         description={description}
+        isDone={isDone}
         theme={theme}
         checkTaskHandler={checkTaskHandler}
         deleteTaskHandler={deleteTaskHandler}

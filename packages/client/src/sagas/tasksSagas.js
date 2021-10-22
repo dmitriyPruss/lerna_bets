@@ -63,10 +63,8 @@ export function * updateTaskSaga (action) {
   yield put(updateTaskRequest());
 
   try {
-    const {
-      data: { data: newTasks }
-    } = yield API.updateTask(id);
-    yield put(updateTaskSuccess(newTasks));
+    yield API.updateTask(id);
+    yield put(updateTaskSuccess(id));
   } catch (error) {
     yield put(updateTaskError(error));
   }

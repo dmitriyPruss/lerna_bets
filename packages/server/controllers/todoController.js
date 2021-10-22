@@ -19,6 +19,8 @@ module.exports.getTodos = async (req, res, next) => {
       offset
     });
 
+    console.log(`GET - foundTodos`, foundTodos);
+
     res.status(200).send({ data: foundTodos });
   } catch (error) {
     next(error);
@@ -32,12 +34,11 @@ module.exports.createTodo = async (req, res, next) => {
 
   try {
     const createdTodo = await Todo.create(body);
-    const sendedTodo = _.omit(createdTodo.get(), [
-      'id',
-      'createdAt',
-      'updatedAt'
-    ]);
 
+    console.log(`createdTodo.get()`, createdTodo.get());
+    const sendedTodo = _.omit(createdTodo.get(), ['createdAt', 'updatedAt']);
+
+    console.log(`CREATE - sendedTodo`, sendedTodo);
     res.status(201).send({ data: sendedTodo });
   } catch (error) {
     next(error);
@@ -46,22 +47,20 @@ module.exports.createTodo = async (req, res, next) => {
 
 module.exports.changeTodo = async (req, res, next) => {
   const {
-    params: { taskId },
-    body
+    params: { taskId }
   } = req;
 
   try {
-    const [updatedTodoCount, [updatedTodoData]] = await Todo.update(body, {
-      where: { id: taskId },
-      returning: true
+    const changedTodo = await Todo.findByPk(taskId);
+    changedTodo.isDone = !changedTodo.isDone;
+
+    console.log(`changedTodo`, changedTodo.get());
+    const [updatedTodoCount] = await Todo.update(changedTodo.get(), {
+      where: { id: taskId }
     });
 
     if (updatedTodoCount) {
-      const changedTodo = _.pick(updatedTodoData.get(), [
-        'description',
-        'isDone'
-      ]);
-      res.status(200).send({ data: changedTodo });
+      return res.status(204).send();
     }
 
     next(createError(404, 'Not Found'));
@@ -75,8 +74,12 @@ module.exports.deleteTodo = async (req, res, next) => {
     params: { taskId }
   } = req;
 
+  console.log(`DELETE - taskId`, taskId);
+
   try {
     const deletedTodoCount = await Todo.destroy({ where: { id: taskId } });
+
+    console.log(`deletedTodoCount `, deletedTodoCount);
 
     deletedTodoCount
       ? res.status(204).send()

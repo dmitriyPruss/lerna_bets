@@ -13,9 +13,14 @@ module.exports.validateErrHandler = (err, req, res, next) => {
 
 module.exports.sequelizeErrHandler = (err, req, res, next) => {
   if (err instanceof BaseError) {
-    return res
-      .status(422)
-      .send({ errors: [{ title: 'Database Error', details: err.errors }] });
+    return res.status(422).send({
+      errors: [
+        {
+          title: 'SQL database error (Sequelize base error)',
+          details: err.errors
+        }
+      ]
+    });
   }
   next(err);
 };

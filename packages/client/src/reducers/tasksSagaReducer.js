@@ -88,13 +88,13 @@ function tasksSagaReducer (state = initialState, action) {
       };
     }
     case ACTION_TYPES.DELETE_TASK_SUCCESS: {
-      const { deletedTask } = action;
+      const { id } = action;
       const { tasks } = state;
 
       const newTasks = [...tasks];
 
       newTasks.splice(
-        newTasks.findIndex(newTask => newTask.id === deletedTask.id),
+        newTasks.findIndex(newTask => newTask.id === id),
         1
       );
 
@@ -122,7 +122,16 @@ function tasksSagaReducer (state = initialState, action) {
       };
     }
     case ACTION_TYPES.UPDATE_TASK_SUCCESS: {
-      const { newTasks } = action;
+      const { id } = action;
+      const { tasks } = state;
+
+      const newTasks = tasks.map(task => {
+        if (task.id === id) {
+          task.isDone = !task.isDone;
+        }
+
+        return task;
+      });
 
       return {
         ...state,
