@@ -1,11 +1,11 @@
 import { Formik, Form } from 'formik';
 import React from 'react';
-import Input from '../../components/Input';
-import { createTaskAction } from './../../actions';
+import Input from '../Input';
+import { createTaskAction } from '../../actions';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-function TasksSagaForm (props) {
+function TasksForm (props) {
   const {
     theme,
     createTask,
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksSagaForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksForm);

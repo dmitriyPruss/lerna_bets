@@ -6,7 +6,7 @@ const initialState = {
   error: null
 };
 
-function tasksSagaReducer (state = initialState, action) {
+function tasksReducer (state = initialState, action) {
   const { type } = action;
 
   switch (type) {
@@ -153,4 +153,4 @@ function tasksSagaReducer (state = initialState, action) {
   }
 }
 
-export default tasksSagaReducer;
+export default tasksReducer;

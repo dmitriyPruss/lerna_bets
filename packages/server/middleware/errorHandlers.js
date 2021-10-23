@@ -4,9 +4,15 @@ const {
 
 module.exports.validateErrHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
-    return res
-      .status(422)
-      .send({ errors: [{ title: 'Validation Error', details: err.errors }] });
+    return res.status(422).send({
+      errors: [
+        {
+          code: '422 Unprocessable Entity',
+          title: 'Validation Error',
+          details: err.errors
+        }
+      ]
+    });
   }
   next(err);
 };
@@ -16,7 +22,8 @@ module.exports.sequelizeErrHandler = (err, req, res, next) => {
     return res.status(422).send({
       errors: [
         {
-          title: 'SQL database error (Sequelize base error)',
+          code: '422 Unprocessable Entity',
+          title: 'SQL Sequelize base error',
           details: err.errors
         }
       ]

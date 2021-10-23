@@ -3,7 +3,7 @@ import * as actionCreators from './../../actions';
 import { connect } from 'react-redux';
 import TasksListItem from './TasksListItem';
 
-function TasksSagaList (props) {
+function TasksList (props) {
   const {
     theme: { theme },
     tasksLoad: { isFetching, error, tasks },
@@ -17,21 +17,14 @@ function TasksSagaList (props) {
     getTasks();
   }, []);
 
-  const mapTask = (task, index) => {
-    const { id, description, isDone } = task;
-
+  const mapTask = ({ id, description, isDone }, index) => {
     const checkTaskHandler = () => {
-      // console.log('checkTaskHandler task :>> ', task);
-      // console.log('checkTaskHandler id :>> ', id);
-
-      updateTask(id, task);
+      updateTask(id, { isDone });
     };
 
     const deleteTaskHandler = () => {
       deleteTask(id);
     };
-
-    console.log('isDone :>> ', isDone);
 
     return (
       <TasksListItem
@@ -48,6 +41,17 @@ function TasksSagaList (props) {
 
   return (
     <>
+      {isFetching && (
+        <div
+          style={{
+            fontSize: '22px',
+            color: 'blue',
+            textShadow: '3px 3px 7px darkblue'
+          }}
+        >
+          Loading...
+        </div>
+      )}
       {error && (
         <div
           style={{
@@ -56,7 +60,7 @@ function TasksSagaList (props) {
             textShadow: '0px 3px 3px white, 0px 6px 4px red'
           }}
         >
-          ERROR!
+          ERROR! {error.message || ''}
         </div>
       )}
       <ul className={itemsContainer}>{tasks.map(mapTask)}</ul>
@@ -71,10 +75,10 @@ const mapDispatchToProps = dispatch => {
     deleteTask: id => {
       dispatch(actionCreators.deleteTaskAction(id));
     },
-    updateTask: (id, task) => {
-      dispatch(actionCreators.updateTaskAction(id, task));
+    updateTask: (id, isDone) => {
+      dispatch(actionCreators.updateTaskAction(id, isDone));
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksSagaList);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksList);

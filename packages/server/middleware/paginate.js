@@ -14,8 +14,8 @@ module.exports.paginateTasks = async (req, res, next) => {
 
   try {
     (await PAGINATION_VALID_SCHEMA.isValid(pagination))
-      ? (console.log(true), (req.pagination = pagination))
-      : (console.log(false), (req.pagination = defaultPagination));
+      ? (req.pagination = pagination)
+      : (req.pagination = defaultPagination);
   } catch (error) {
     next(error);
   }

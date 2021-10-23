@@ -1,22 +1,22 @@
 import React from 'react';
-import TasksSagaForm from '../../components/TasksSagaForm';
-import TasksSagaList from '../../components/TasksSagaList';
+import TasksForm from '../../components/TasksForm';
+import TasksList from '../../components/TasksList';
 import { connect } from 'react-redux';
 import ACTION_TYPES from '../../actions/actionTypes';
 import { Button } from 'react-bootstrap';
-import styles from './TodoSagaPage.module.scss';
+import styles from './TodoPage.module.scss';
 
-function TodoSagaPage (props) {
+function TodoPage (props) {
   const { theme, length, changeTheme } = props;
 
   const formClasses = {
-    inputData: styles.inputData,
+    inputData: styles.inputData
   };
 
   const listClasses = {
     itemsContainer: styles.itemsContainer,
     listItemLight: styles.listItemLight,
-    listItemDark: styles.listItemDark,
+    listItemDark: styles.listItemDark
   };
 
   return (
@@ -31,19 +31,19 @@ function TodoSagaPage (props) {
       >
         Change Theme
       </Button>
-      <TasksSagaForm formClasses={formClasses} />
-      <TasksSagaList listClasses={listClasses} />
+      <TasksForm formClasses={formClasses} />
+      <TasksList listClasses={listClasses} />
     </div>
   );
 }
 
 const mapStateToProps = state => ({
   theme: state.theme.theme,
-  length: state.tasksLoad.tasks.length,
+  length: state.tasksLoad.tasks.length
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeTheme: () => dispatch({ type: ACTION_TYPES.CHANGE_THEME }),
+  changeTheme: () => dispatch({ type: ACTION_TYPES.CHANGE_THEME })
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoSagaPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoPage);

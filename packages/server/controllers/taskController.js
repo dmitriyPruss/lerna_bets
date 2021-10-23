@@ -7,8 +7,6 @@ module.exports.getTasks = async (req, res, next) => {
     pagination: { limit, offset }
   } = req;
 
-  console.log(`req.pagination`, req.pagination);
-
   try {
     const foundTasks = await Task.findAll({
       raw: true,
@@ -19,8 +17,6 @@ module.exports.getTasks = async (req, res, next) => {
       offset
     });
 
-    console.log(`GET - foundTodos`, foundTasks);
-
     res.status(200).send({ data: foundTasks });
   } catch (error) {
     next(error);
@@ -30,15 +26,10 @@ module.exports.getTasks = async (req, res, next) => {
 module.exports.createTask = async (req, res, next) => {
   const { body } = req;
 
-  console.log(`body`, body);
-
   try {
     const createdTask = await Task.create(body);
-
-    console.log(`createdTask.get()`, createdTask.get());
     const sendedTask = _.omit(createdTask.get(), ['createdAt', 'updatedAt']);
 
-    console.log(`CREATE - sendedTask`, sendedTask);
     return res.status(201).send({ data: sendedTask });
   } catch (error) {
     next(error);
@@ -48,22 +39,20 @@ module.exports.createTask = async (req, res, next) => {
 module.exports.changeTask = async (req, res, next) => {
   const {
     params: { taskId },
-    body
+    body: { isDone }
   } = req;
 
-  console.log(`body`, body);
-  console.log(`taskId`, taskId);
-
-  body.isDone = !body.isDone;
-  console.log(`body changed`, body);
-
   try {
-    const [updatedTaskCount, [updatedTask]] = await Task.update(body, {
-      where: { id: taskId },
-      returning: true
-    });
+    const foundTask = await Task.findByPk(taskId);
+    foundTask.isDone = !isDone;
 
-    console.log(`updatedTask.get()`, updatedTask.get());
+    const [updatedTaskCount, [updatedTask]] = await Task.update(
+      foundTask.get(),
+      {
+        where: { id: taskId },
+        returning: true
+      }
+    );
 
     if (updatedTaskCount > 0) {
       const changedTask = _.omit(updatedTask.get(), ['createdAt', 'updatedAt']);
@@ -80,12 +69,8 @@ module.exports.deleteTask = async (req, res, next) => {
     params: { taskId }
   } = req;
 
-  console.log(`DELETE - taskId`, taskId);
-
   try {
     const deletedTaskCount = await Task.destroy({ where: { id: taskId } });
-
-    console.log(`deletedTaskCount `, deletedTaskCount);
 
     if (deletedTaskCount) {
       return res.status(204).send();

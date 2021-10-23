@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import TodoSagaPage from './pages/TodoSagaPage';
+import TodoPage from './pages/TodoPage';
 
-const App = () => <TodoSagaPage />;
+const App = () => <TodoPage />;
 
 export default App;

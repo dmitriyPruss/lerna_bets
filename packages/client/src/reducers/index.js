@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import themeReducer from './themeReducer';
-import tasksSagaReducer from './tasksSagaReducer';
+import tasksReducer from './tasksReducer';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
-  tasksLoad: tasksSagaReducer,
+  tasksLoad: tasksReducer
 });
 
 export default rootReducer;

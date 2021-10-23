@@ -39,6 +39,27 @@ export const getTasksError = error => ({
   error
 });
 
+//Update:
+export const updateTaskAction = (id, isDone) => ({
+  type: ACTION_TYPES.UPDATE_TASK_ACTION,
+  id,
+  isDone
+});
+
+export const updateTaskRequest = () => ({
+  type: ACTION_TYPES.UPDATE_TASK_REQUEST
+});
+
+export const updateTaskSuccess = task => ({
+  type: ACTION_TYPES.UPDATE_TASK_SUCCESS,
+  task
+});
+
+export const updateTaskError = error => ({
+  type: ACTION_TYPES.UPDATE_TASK_ERROR,
+  error
+});
+
 //Delete:
 export const deleteTaskAction = id => ({
   type: ACTION_TYPES.DELETE_TASK_ACTION,
@@ -56,26 +77,5 @@ export const deleteTaskSuccess = id => ({
 
 export const deleteTaskError = error => ({
   type: ACTION_TYPES.DELETE_TASK_ERROR,
-  error
-});
-
-//Update:
-export const updateTaskAction = (id, task) => ({
-  type: ACTION_TYPES.UPDATE_TASK_ACTION,
-  id,
-  task
-});
-
-export const updateTaskRequest = () => ({
-  type: ACTION_TYPES.UPDATE_TASK_REQUEST
-});
-
-export const updateTaskSuccess = task => ({
-  type: ACTION_TYPES.UPDATE_TASK_SUCCESS,
-  task
-});
-
-export const updateTaskError = error => ({
-  type: ACTION_TYPES.UPDATE_TASK_ERROR,
   error
 });

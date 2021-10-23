@@ -12,7 +12,7 @@ module.exports.PAGINATION_VALID_SCHEMA = yup.object().shape({
     .required('Offset value must not be empty')
 });
 
-const DESCRIPTION_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{1,42}$/);
+const DESCRIPTION_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{2,42}$/);
 
 module.exports.NEW_TASK_VALID_SCHEMA = yup.object().shape({
   description: DESCRIPTION_SCHEMA.required('Task value must not be empty'),
