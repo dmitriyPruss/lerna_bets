@@ -12,8 +12,9 @@ const Input = props => {
         {({ field, form, meta }) => {
           const inputClassName = classNames(styles.inputElement, {
             [styles.valid]: !meta.error && meta.touched,
-            [styles.invalid]: meta.error && meta.touched,
+            [styles.invalid]: meta.error && meta.touched
           });
+
           return <input {...field} {...rest} className={inputClassName} />;
         }}
       </Field>

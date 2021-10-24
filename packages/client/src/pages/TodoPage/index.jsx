@@ -31,8 +31,14 @@ function TodoPage (props) {
       >
         Change Theme
       </Button>
-      <TasksForm formClasses={formClasses} />
-      <TasksList listClasses={listClasses} />
+      <section
+        className={
+          theme ? styles.mainContainerDataLight : styles.mainContainerDataDark
+        }
+      >
+        <TasksForm formClasses={formClasses} />
+        <TasksList listClasses={listClasses} />
+      </section>
     </div>
   );
 }

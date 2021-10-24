@@ -15,7 +15,7 @@ function TasksList (props) {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [tasks.length]);
 
   const mapTask = ({ id, description, isDone }, index) => {
     const checkTaskHandler = () => {

@@ -7,11 +7,7 @@ const taskRouter = Router();
 taskRouter
   .route('/')
   .get(paginate.paginateTasks, taskController.getTasks)
-  .post(
-    paginate.paginateTasks,
-    validate.validateNewTask,
-    taskController.createTask
-  );
+  .post(validate.validateNewTask, taskController.createTask);
 
 taskRouter
   .route('/:taskId')

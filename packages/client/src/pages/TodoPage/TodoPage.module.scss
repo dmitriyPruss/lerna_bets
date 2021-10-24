@@ -16,6 +16,31 @@
   @extend %containerSets;
 }
 
+.mainContainerDataDark,
+.mainContainerDataLight {
+  @extend %mainContainerSets;
+}
+
+.mainContainerDataLight {
+  border-radius: 70px 10px;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgb(194, 235, 248),
+    rgb(19, 101, 116)
+  );
+  box-shadow: inset rgba(0, 0, 0, 0.6) 0 -3px 8px,
+    inset rgba(252, 255, 255, 0.7) 0 3px 8px, rgba(0, 0, 0, 0.8) 0 3px 8px -3px,
+    0px 5px 10px rgba(35, 75, 206, 0.548);
+}
+
+.mainContainerDataDark {
+  border-radius: 10px 70px;
+  background: radial-gradient(circle at 50% 0, grey, black);
+  box-shadow: inset rgba(0, 0, 0, 0.6) 0 -3px 8px,
+    inset rgba(252, 255, 255, 0.7) 0 3px 8px, rgba(0, 0, 0, 0.8) 0 3px 8px -3px,
+    0px 5px 10px rgba(114, 4, 4, 0.548);
+}
+
 .containerLight {
   background: rgb(198, 248, 241);
 }
@@ -42,10 +67,10 @@
   @extend %itemsContainerSets;
 
   @media screen and (max-width: 900px) {
-    width: 80%;
+    width: 90%;
   }
   @media screen and (max-width: 800px) {
-    width: 85%;
+    width: 90%;
   }
   @media screen and (max-width: 700px) {
     width: 90%;
@@ -61,7 +86,7 @@
 .inputData {
   margin-bottom: 30px;
   position: relative;
-  width: 50%;
+  width: 51%;
   display: flex;
   justify-content: space-between;
 
@@ -84,9 +109,23 @@
   }
 }
 
+.listItemLight:hover,
+.listItemDark:hover {
+  cursor: pointer;
+}
+
+.listItemLight:hover {
+  background: $hoverBackLight;
+}
+
+.listItemDark:hover {
+  background: $hoverBackDark;
+}
+
 .listItemLight {
   background: $lightBack;
   border: 2px outset rgb(28, 122, 102);
+  border-radius: 10px 2px;
 
   & > span {
     background-color: rgb(8, 19, 16);
@@ -97,6 +136,7 @@
 .listItemDark {
   background: $darkBack;
   border: 2px double rgb(253, 253, 253);
+  border-radius: 2px 10px;
 
   & > span {
     background-color: #161414;

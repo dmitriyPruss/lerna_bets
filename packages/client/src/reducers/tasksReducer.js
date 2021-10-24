@@ -61,23 +61,7 @@ function tasksReducer (state = initialState, action) {
           isFetching: false
         };
       }
-
-      const limit = 8;
-
       const newTasks = [...tasks, newTask];
-
-      if (newTasks.length > limit) {
-        const renderedTasks = newTasks.slice(
-          newTasks.length - limit,
-          newTasks.length
-        );
-
-        return {
-          ...state,
-          tasks: renderedTasks,
-          isFetching: false
-        };
-      }
 
       return {
         ...state,

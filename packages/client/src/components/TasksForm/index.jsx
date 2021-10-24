@@ -4,6 +4,7 @@ import Input from '../Input';
 import { createTaskAction } from '../../actions';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { INPUT_SCHEMA } from '../../utils/validationSchema';
 
 function TasksForm (props) {
   const {
@@ -22,6 +23,7 @@ function TasksForm (props) {
     <>
       <Formik
         initialValues={{ description: '', isDone: false }}
+        validationSchema={INPUT_SCHEMA}
         onSubmit={addTaskHandler}
       >
         {formikProps => {
@@ -29,7 +31,7 @@ function TasksForm (props) {
             <Form className={inputData}>
               <Input name='description' placeholder='Enter Todo...' />
               <Button
-                variant={theme ? 'outline-success' : 'outline-light'}
+                variant={theme ? 'outline-primary' : 'outline-light'}
                 as='input'
                 type='submit'
                 value='Add Task'

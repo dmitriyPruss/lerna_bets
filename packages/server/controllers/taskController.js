@@ -16,7 +16,7 @@ module.exports.getTasks = async (req, res, next) => {
           exclude: ['createdAt', 'updatedAt']
         },
         limit: 8,
-        offset,
+        offset: 0,
         order: [['createdAt', 'DESC']]
       });
 
