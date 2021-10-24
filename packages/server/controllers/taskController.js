@@ -14,10 +14,11 @@ module.exports.getTasks = async (req, res, next) => {
         exclude: ['createdAt', 'updatedAt']
       },
       limit,
-      offset
+      offset,
+      order: [['createdAt', 'DESC']]
     });
 
-    res.status(200).send({ data: foundTasks });
+    res.status(200).send({ data: foundTasks.reverse() });
   } catch (error) {
     next(error);
   }

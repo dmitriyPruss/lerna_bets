@@ -10,9 +10,9 @@ export const createTaskRequest = () => ({
   type: ACTION_TYPES.CREATE_TASK_REQUEST
 });
 
-export const createTaskSuccess = task => ({
+export const createTaskSuccess = newTask => ({
   type: ACTION_TYPES.CREATE_TASK_SUCCESS,
-  task
+  newTask
 });
 
 export const createTaskError = error => ({

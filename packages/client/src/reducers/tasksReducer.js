@@ -46,7 +46,7 @@ function tasksReducer (state = initialState, action) {
       };
     }
     case ACTION_TYPES.CREATE_TASK_SUCCESS: {
-      const { task: newTask } = action;
+      const { newTask } = action;
       const { tasks } = state;
 
       let stopFunc = null;

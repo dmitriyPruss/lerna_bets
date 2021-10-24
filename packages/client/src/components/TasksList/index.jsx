@@ -39,6 +39,10 @@ function TasksList (props) {
     );
   };
 
+  if (error) {
+    console.log('error :>> ', error);
+  }
+
   return (
     <>
       {isFetching && (

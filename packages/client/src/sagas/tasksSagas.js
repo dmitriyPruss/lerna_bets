@@ -31,13 +31,14 @@ export function * getTasksSaga () {
 
 export function * createTaskSaga (action) {
   const { task } = action;
-
+  console.log(`task`, task);
   yield put(createTaskRequest());
 
   try {
     const {
       data: { data: newTask }
     } = yield API.createTask(task);
+
     yield put(createTaskSuccess(newTask));
   } catch (error) {
     yield put(createTaskError(error));
