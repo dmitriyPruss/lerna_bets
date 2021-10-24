@@ -4,21 +4,35 @@ const { Task } = require('../models');
 
 module.exports.getTasks = async (req, res, next) => {
   const {
-    pagination: { limit, offset }
+    pagination: { limit, offset },
+    emptyQuery
   } = req;
 
   try {
+    if (emptyQuery) {
+      const foundRenderTasks = await Task.findAll({
+        raw: true,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        limit: 8,
+        offset,
+        order: [['createdAt', 'DESC']]
+      });
+
+      return res.status(200).send({ data: foundRenderTasks.reverse() });
+    }
+
     const foundTasks = await Task.findAll({
       raw: true,
       attributes: {
         exclude: ['createdAt', 'updatedAt']
       },
       limit,
-      offset,
-      order: [['createdAt', 'DESC']]
+      offset
     });
 
-    res.status(200).send({ data: foundTasks.reverse() });
+    res.status(200).send({ data: foundTasks });
   } catch (error) {
     next(error);
   }
