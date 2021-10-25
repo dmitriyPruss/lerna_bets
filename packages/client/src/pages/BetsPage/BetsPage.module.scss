@@ -26,7 +26,7 @@
 }
 
 .mainContainerDataLight {
-  border-radius: 55px 10px;
+  border-radius: 20px 20px 0px 0px;
   background: radial-gradient(
     circle at 50% 30%,
     rgb(194, 235, 248),
@@ -56,6 +56,14 @@
 .headerLight,
 .headerDark {
   @extend %headerSets;
+
+  @media screen and (max-width: 600px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 1.5rem;
+  }
 }
 
 .headerLight {
@@ -125,7 +133,7 @@
 .listItemLight {
   background: $lightBack;
   border: 2px outset rgb(28, 122, 102);
-  border-radius: 10px 2px;
+  border-radius: 10px 10px 1px 1px;
 
   & > span {
     background-color: rgb(8, 19, 16);

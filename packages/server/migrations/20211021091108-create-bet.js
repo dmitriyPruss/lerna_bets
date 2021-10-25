@@ -1,19 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Tasks', {
+    await queryInterface.createTable('Bets', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      description: {
+      ip: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      team: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
-      isDone: {
+      betValue: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      isWinned: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
@@ -28,6 +36,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Tasks');
+    await queryInterface.dropTable('Bets');
   }
 };

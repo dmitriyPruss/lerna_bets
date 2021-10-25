@@ -1,28 +1,29 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-function TasksListItem (props) {
+function BetListItem (props) {
   const {
-    description,
-    isDone,
+    team,
+    betValue,
+    isWinned,
     theme,
-    checkTaskHandler,
-    deleteTaskHandler,
+    checkBetHandler,
+    deleteBetHandler,
     listClasses: { listItemLight, listItemDark }
   } = props;
 
   return (
     <li className={theme ? listItemLight : listItemDark}>
       <input
-        defaultChecked={isDone ? true : false}
+        defaultChecked={isWinned ? true : false}
         type='checkbox'
-        onClick={checkTaskHandler}
+        onClick={checkBetHandler}
       />
-      <span>{description}</span>
+      <span>Team: {team}</span>, <span>bet: {betValue}$</span>
       <Button
         variant={theme ? 'outline-success' : 'outline-light'}
-        onClick={deleteTaskHandler}
+        onClick={deleteBetHandler}
       >
         <DeleteOutlineIcon />
       </Button>
@@ -30,4 +31,4 @@ function TasksListItem (props) {
   );
 }
 
-export default TasksListItem;
+export default BetListItem;

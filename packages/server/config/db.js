@@ -1,11 +1,13 @@
+const { DB } = require('./../constants');
+
 module.exports = {
   development: {
-    username: process.env.DB_USER ?? 'postgres',
-    password: process.env.DB_PASSWORD ?? 'admin',
-    database: 'tasks_db_dev',
-    host: process.env.DB_HOST ?? '127.0.0.1',
-    port: 5432,
-    dialect: 'postgres'
+    username: process.env.DB_USER ?? DB.USERNAME_DEFAULT,
+    password: process.env.DB_PASSWORD ?? DB.PASSWORD_DEFAULT,
+    database: DB.NAME_DB,
+    host: process.env.DB_HOST ?? DB.HOST_DEFAULT,
+    port: DB.PORT,
+    dialect: DB.DIALECT
   },
   test: {
     username: 'root',

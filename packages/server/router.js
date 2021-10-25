@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const taskRouter = require('./routes/taskRouter');
+const betRouter = require('./routes/betRouter');
 
 const router = Router();
 
-router.use('/tasks', taskRouter);
+router.use('/bets', betRouter);
 
 module.exports = router;

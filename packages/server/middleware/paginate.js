@@ -1,7 +1,10 @@
 const _ = require('lodash');
 const { PAGINATION_VALID_SCHEMA } = require('../utils/validationSchema');
+const {
+  PAGINATION: { LIMIT_HTTP_REQUEST_DEFAULT, OFFSET_DEFAULT }
+} = require('./../constants');
 
-module.exports.paginateTasks = async (req, res, next) => {
+module.exports.paginateBets = async (req, res, next) => {
   if (_.isEmpty(req.query)) {
     req.emptyQuery = true;
   }
@@ -10,11 +13,14 @@ module.exports.paginateTasks = async (req, res, next) => {
     query: { page, items }
   } = req;
 
-  const defaultPagination = { limit: 7, offset: 0 };
+  const defaultPagination = {
+    limit: LIMIT_HTTP_REQUEST_DEFAULT,
+    offset: OFFSET_DEFAULT
+  };
 
   const pagination = {
-    limit: items ?? 7,
-    offset: (page - 1) * items || 0
+    limit: items ?? LIMIT_HTTP_REQUEST_DEFAULT,
+    offset: (page - 1) * items || OFFSET_DEFAULT
   };
 
   try {

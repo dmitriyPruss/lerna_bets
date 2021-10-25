@@ -1,81 +1,85 @@
 import ACTION_TYPES from './actionTypes';
 
+export const changeThemeAction = () => ({
+  type: ACTION_TYPES.CHANGE_THEME
+});
+
 // Create:
-export const createTaskAction = task => ({
-  type: ACTION_TYPES.CREATE_TASK_ACTION,
-  task
+export const createBetAction = bet => ({
+  type: ACTION_TYPES.CREATE_BET_ACTION,
+  bet
 });
 
-export const createTaskRequest = () => ({
-  type: ACTION_TYPES.CREATE_TASK_REQUEST
+export const createBetRequest = () => ({
+  type: ACTION_TYPES.CREATE_BET_REQUEST
 });
 
-export const createTaskSuccess = newTask => ({
-  type: ACTION_TYPES.CREATE_TASK_SUCCESS,
-  newTask
+export const createBetSuccess = newBet => ({
+  type: ACTION_TYPES.CREATE_BET_SUCCESS,
+  newBet
 });
 
-export const createTaskError = error => ({
-  type: ACTION_TYPES.CREATE_TASK_ERROR,
+export const createBetError = error => ({
+  type: ACTION_TYPES.CREATE_BET_ERROR,
   error
 });
 
 //Read
-export const getTasksAction = () => ({
-  type: ACTION_TYPES.GET_TASKS_ACTION
+export const getBetsAction = () => ({
+  type: ACTION_TYPES.GET_BETS_ACTION
 });
 
-export const getTasksRequest = () => ({
-  type: ACTION_TYPES.GET_TASKS_REQUEST
+export const getBetsRequest = () => ({
+  type: ACTION_TYPES.GET_BETS_REQUEST
 });
 
-export const getTasksSuccess = tasks => ({
-  type: ACTION_TYPES.GET_TASKS_SUCCESS,
-  tasks
+export const getBetsSuccess = bets => ({
+  type: ACTION_TYPES.GET_BETS_SUCCESS,
+  bets
 });
 
-export const getTasksError = error => ({
-  type: ACTION_TYPES.GET_TASKS_ERROR,
+export const getBetsError = error => ({
+  type: ACTION_TYPES.GET_BETS_ERROR,
   error
 });
 
 //Update:
-export const updateTaskAction = (id, isDone) => ({
-  type: ACTION_TYPES.UPDATE_TASK_ACTION,
+export const updateBetAction = (id, isWinned) => ({
+  type: ACTION_TYPES.UPDATE_BET_ACTION,
   id,
-  isDone
+  isWinned
 });
 
-export const updateTaskRequest = () => ({
-  type: ACTION_TYPES.UPDATE_TASK_REQUEST
+export const updateBetRequest = () => ({
+  type: ACTION_TYPES.UPDATE_BET_REQUEST
 });
 
-export const updateTaskSuccess = task => ({
-  type: ACTION_TYPES.UPDATE_TASK_SUCCESS,
-  task
+export const updateBetSuccess = bet => ({
+  type: ACTION_TYPES.UPDATE_BET_SUCCESS,
+  bet
 });
 
-export const updateTaskError = error => ({
-  type: ACTION_TYPES.UPDATE_TASK_ERROR,
+export const updateBetError = error => ({
+  type: ACTION_TYPES.UPDATE_BET_ERROR,
   error
 });
 
 //Delete:
-export const deleteTaskAction = id => ({
-  type: ACTION_TYPES.DELETE_TASK_ACTION,
+export const deleteBetAction = id => ({
+  type: ACTION_TYPES.DELETE_BET_ACTION,
   id
 });
 
-export const deleteTaskRequest = () => ({
-  type: ACTION_TYPES.DELETE_TASK_REQUEST
+export const deleteBetRequest = () => ({
+  type: ACTION_TYPES.DELETE_BET_REQUEST
 });
 
-export const deleteTaskSuccess = id => ({
-  type: ACTION_TYPES.DELETE_TASK_SUCCESS,
+export const deleteBetSuccess = id => ({
+  type: ACTION_TYPES.DELETE_BET_SUCCESS,
   id
 });
 
-export const deleteTaskError = error => ({
-  type: ACTION_TYPES.DELETE_TASK_ERROR,
+export const deleteBetError = error => ({
+  type: ACTION_TYPES.DELETE_BET_ERROR,
   error
 });

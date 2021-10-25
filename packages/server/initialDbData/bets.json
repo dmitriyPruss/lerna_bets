@@ -1,0 +1,20 @@
+[
+  {
+    "ip": "127.0.0.2",
+    "team": "Fast Horse",
+    "betValue": 500,
+    "isWinned": false
+  },
+  {
+    "ip": "127.0.0.5",
+    "team": "Lightning",
+    "betValue": 1000,
+    "isWinned": false
+  },
+  {
+    "ip": "127.0.0.6",
+    "team": "Young Cheetah",
+    "betValue": 5000,
+    "isWinned": false
+  }
+]

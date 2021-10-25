@@ -1,15 +1,18 @@
 const {
   Sequelize: { BaseError }
 } = require('../models');
+const {
+  ERRORS: { ERROR_422, ERROR_500 }
+} = require('./../constants');
 
 module.exports.validateErrHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
     return res.status(422).send({
       errors: [
         {
-          status: 422,
-          code: '422 Unprocessable Entity',
-          title: 'Validation Error',
+          status: ERROR_422.ERROR_STATUS,
+          code: ERROR_422.ERROR_CODE,
+          title: ERROR_422.TITLE[0],
           details: err.errors
         }
       ]
@@ -23,9 +26,9 @@ module.exports.sequelizeErrHandler = (err, req, res, next) => {
     return res.status(422).send({
       errors: [
         {
-          status: 422,
-          code: '422 Unprocessable Entity',
-          title: 'SQL Sequelize base error',
+          status: ERROR_422.ERROR_STATUS,
+          code: ERROR_422.ERROR_CODE,
+          title: ERROR_422.TITLE[1],
           details: err.errors
         }
       ]
@@ -39,6 +42,6 @@ module.exports.commonErrHandler = (err, req, res, next) => {
     return;
   }
   res
-    .status(err?.status ?? 500)
-    .send({ errors: [{ title: err?.message ?? 'Internal server error' }] });
+    .status(err?.status ?? ERROR_500.ERROR_STATUS)
+    .send({ errors: [{ title: err?.message ?? ERROR_500.ERROR_MESSAGE }] });
 };

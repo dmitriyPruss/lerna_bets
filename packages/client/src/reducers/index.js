@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import themeReducer from './themeReducer';
-import tasksReducer from './tasksReducer';
+import betsReducer from './betsReducer';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
-  tasksLoad: tasksReducer
+  betsLoad: betsReducer
 });
 
 export default rootReducer;

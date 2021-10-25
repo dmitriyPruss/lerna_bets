@@ -1,9 +1,16 @@
 import * as yup from 'yup';
+import CONSTANTS from '../constants';
+
+const {
+  VALIDATION: {
+    INPUT: { TEAM }
+  }
+} = CONSTANTS;
 
 export const INPUT_SCHEMA = yup.object({
-  description: yup
+  team: yup
     .string()
-    .min(2, 'Very few symbols!')
-    .max(27, 'Too much symbols!')
-    .required('Field musn`t be empty!')
+    .min(2, TEAM.MIN)
+    .max(27, TEAM.MAX)
+    .required(TEAM.REQUIRED)
 });

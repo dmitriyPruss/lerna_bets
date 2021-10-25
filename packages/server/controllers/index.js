@@ -1,1 +1,1 @@
-module.exports.taskController = require('./taskController');
+module.exports.betController = require('./betController');

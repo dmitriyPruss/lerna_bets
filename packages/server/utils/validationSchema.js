@@ -1,25 +1,42 @@
 const yup = require('yup');
+const {
+  PAGINATION: {
+    TEAM_VALIDATION: { REQUIRED },
+    REQUEST_VALIDATION: { LIMIT, OFFSET }
+  }
+} = require('./../constants');
 
 module.exports.PAGINATION_VALID_SCHEMA = yup.object().shape({
   limit: yup
     .number()
-    .min(1, 'Limit - less than the min value')
-    .max(20, 'Limit - more than the max value')
-    .required('Limit value must not be empty'),
+    .min(1, LIMIT.MIN)
+    .max(20, LIMIT.MAX)
+    .required(LIMIT.REQUIRED),
   offset: yup
     .number()
-    .min(1, 'Offset - less than the min value')
-    .required('Offset value must not be empty')
+    .min(1, OFFSET.MIN)
+    .required(OFFSET.REQUIRED)
 });
 
-const DESCRIPTION_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{2,27}$/);
+const TEAM_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{2,27}$/);
 
-module.exports.NEW_TASK_VALID_SCHEMA = yup.object().shape({
-  description: DESCRIPTION_SCHEMA.required('Task value must not be empty'),
-  isDone: yup.boolean()
+module.exports.NEW_BET_VALID_SCHEMA = yup.object().shape({
+  ip: yup.string().required(),
+  team: TEAM_SCHEMA.required(REQUIRED),
+  betValue: yup
+    .number()
+    .min(100)
+    .max(5000)
+    .required(),
+  isWinned: yup.boolean()
 });
 
-module.exports.CHANGED_TASK_VALID_SCHEMA = yup.object().shape({
-  description: DESCRIPTION_SCHEMA,
-  isDone: yup.boolean()
+module.exports.CHANGED_BET_VALID_SCHEMA = yup.object().shape({
+  ip: yup.string(),
+  team: TEAM_SCHEMA,
+  betValue: yup
+    .number()
+    .min(100)
+    .max(5000),
+  isWinned: yup.boolean()
 });

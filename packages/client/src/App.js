@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import TodoPage from './pages/TodoPage';
+import BetsPage from './pages/BetsPage';
 
-const App = () => <TodoPage />;
+const App = () => <BetsPage />;
 
 export default App;

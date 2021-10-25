@@ -1,12 +1,18 @@
 const createError = require('http-errors');
+const _ = require('lodash');
 const {
-  NEW_TASK_VALID_SCHEMA,
-  CHANGED_TASK_VALID_SCHEMA
+  NEW_BET_VALID_SCHEMA,
+  CHANGED_BET_VALID_SCHEMA
 } = require('../utils/validationSchema');
+const { createErr422 } = require('./../errorCreators');
 
-module.exports.validateNewTask = async (req, res, next) => {
+module.exports.validateNewBet = async (req, res, next) => {
+  if (_.isEmpty(req.body)) {
+    return next();
+  }
+
   try {
-    if (await NEW_TASK_VALID_SCHEMA.isValid(req.body)) {
+    if (await NEW_BET_VALID_SCHEMA.isValid(req.body)) {
       return next();
     }
   } catch (error) {
@@ -14,10 +20,10 @@ module.exports.validateNewTask = async (req, res, next) => {
   }
 };
 
-module.exports.validateChangedTask = async (req, res, next) => {
-  if (await CHANGED_TASK_VALID_SCHEMA.isValid(req.body)) {
+module.exports.validateChangedBet = async (req, res, next) => {
+  if (await CHANGED_BET_VALID_SCHEMA.isValid(req.body)) {
     return next();
   }
 
-  next(createError(422, 'Validation Error'));
+  next(createErr422);
 };

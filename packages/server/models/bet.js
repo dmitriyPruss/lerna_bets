@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Task extends Model {
+  class Bet extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,25 +9,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {}
   }
-  Task.init(
+  Bet.init(
     {
-      description: {
+      ip: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIP: true
+        }
+      },
+      team: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          is: /^[A-Za-z0-9\s]{1,38}$/
+          is: /^[A-Za-z0-9\s]{2,18}$/
         }
       },
-      isDone: {
+      betValue: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isIn: [[100, 200, 500, 1000, 5000]]
+        }
+      },
+      isWinned: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       }
     },
     {
       sequelize,
-      modelName: 'Task'
+      modelName: 'Bet'
     }
   );
-  return Task;
+  return Bet;
 };
