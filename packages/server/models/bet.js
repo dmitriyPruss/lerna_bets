@@ -14,14 +14,19 @@ module.exports = (sequelize, DataTypes) => {
       ip: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: 'composite_index',
         validate: {
           isIP: true
         }
       },
+      userAgent: {
+        type: DataTypes.STRING,
+        defaultValue: 'information is absent'
+      },
       team: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: 'composite_index',
         validate: {
           is: /^[A-Za-z0-9\s]{2,18}$/
         }

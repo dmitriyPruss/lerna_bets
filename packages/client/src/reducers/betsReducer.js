@@ -36,18 +36,6 @@ function betsReducer (state = initialState, action) {
       const { newBet } = action;
       const { bets } = state;
 
-      let stopFunc = null;
-      bets.forEach(bet => {
-        if (bet.team === newBet.team.trim()) {
-          stopFunc = true;
-        }
-      });
-      if (stopFunc) {
-        return {
-          ...state,
-          isFetching: false
-        };
-      }
       const newBets = [...bets, newBet];
 
       return {

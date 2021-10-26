@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import GppBadIcon from '@mui/icons-material/GppBad';
 
 function BetListItem (props) {
   const {
@@ -10,7 +10,7 @@ function BetListItem (props) {
     theme,
     checkBetHandler,
     deleteBetHandler,
-    listClasses: { listItemLight, listItemDark }
+    listClasses: { listItemLight, listItemDark, textContainer }
   } = props;
 
   return (
@@ -20,12 +20,15 @@ function BetListItem (props) {
         type='checkbox'
         onClick={checkBetHandler}
       />
-      <span>Team: {team}</span>, <span>bet: {betValue}$</span>
+      <div className={textContainer}>
+        <div>Team: {team}</div>
+        <div>Bet: {betValue}$</div>
+      </div>
       <Button
         variant={theme ? 'outline-success' : 'outline-light'}
         onClick={deleteBetHandler}
       >
-        <DeleteOutlineIcon />
+        <GppBadIcon />
       </Button>
     </li>
   );

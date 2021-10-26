@@ -12,13 +12,10 @@ function BetForm (props) {
   const dispatch = useDispatch();
   const createBet = bindActionCreators(createBetAction, dispatch);
   const {
-    formClasses: { inputData }
+    formClasses: { inputData, selectItem }
   } = props;
 
-  console.log('FORM createBet :>> ', createBet);
-
   const addBetHandler = (values, formikBag) => {
-    console.log('values :>> ', values);
     createBet(values);
 
     formikBag.resetForm();
@@ -35,7 +32,7 @@ function BetForm (props) {
           return (
             <Form className={inputData}>
               <Input name='team' placeholder='Enter a team...' />
-              <Field as='select' name='betValue'>
+              <Field className={selectItem} as='select' name='betValue'>
                 <option value={100}>100</option>
                 <option value={200}>200</option>
                 <option value={500}>500</option>

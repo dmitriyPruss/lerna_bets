@@ -1,11 +1,11 @@
 # `server`
 
-> TODO: description
+> BET: description
 
 ## Usage
 
 ```
 const server = require('server');
 
-// TODO: DEMONSTRATE API
+// BET: DEMONSTRATE API
 ```

@@ -47,10 +47,6 @@ module.exports.createBet = async (req, res, next) => {
     }
   } = req;
 
-  console.log(`body`, body);
-
-  console.log(`IP`, ip);
-
   const io = req.app.locals.io;
 
   try {
@@ -58,7 +54,6 @@ module.exports.createBet = async (req, res, next) => {
       body.ip = ip;
       const newBetData = await Bet.create(body);
       const newBet = _.omit(newBetData.get(), ['createdAt', 'updatedAt']);
-      console.log(`newBet`, newBet);
 
       return res.status(201).send({ data: newBet });
     }

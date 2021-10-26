@@ -17,13 +17,15 @@ function BetsPage (props) {
   const changeTheme = bindActionCreators(changeThemeAction, dispatch);
 
   const formClasses = {
-    inputData: styles.inputData
+    inputData: styles.inputData,
+    selectItem: styles.selectItem
   };
 
   const listClasses = {
     itemsContainer: styles.itemsContainer,
     listItemLight: styles.listItemLight,
-    listItemDark: styles.listItemDark
+    listItemDark: styles.listItemDark,
+    textContainer: styles.textContainer
   };
 
   return (

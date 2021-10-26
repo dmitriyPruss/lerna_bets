@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const _ = require('lodash');
 const {
   NEW_BET_VALID_SCHEMA,

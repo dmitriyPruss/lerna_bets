@@ -1,24 +1,25 @@
 const http = require('http');
 const { Server } = require('socket.io');
 const app = require('./app');
-const { PORT_DEFAULT } = require('./constants');
-
+const {
+  PORT_DEFAULT,
+  CORS_ORIGIN_DEFAULT,
+  SOCKET_EVENTS
+} = require('./constants');
 // require('./models');
 
 const httpServer = http.createServer(app);
-const ioSets = { cors: { origin: 'http://localhost:3000' } };
+const ioSets = { cors: { origin: CORS_ORIGIN_DEFAULT } };
 const io = new Server(httpServer, ioSets);
-
-const SOCKET_EVENTS = { NEW_BET: 'NEW_BET', NEW_BET_ERROR: 'NEW_BET_ERROR' };
 
 app.locals.io = io;
 
 io.on('connection', socket => {
-  console.log(`${socket} is connected`);
+  console.log(`socket.connected`, socket.connected);
 
-  socket.on(SOCKET_EVENTS.NEW_BET, async value => {
-    console.log(`SOCKET SERVER value`, value);
+  socket.on(SOCKET_EVENTS.NEW_BET, value => {
     try {
+      value.userAgent = socket.handshake.headers['user-agent'];
       app.locals.newBetInstance = value;
     } catch (error) {
       io.emit(SOCKET_EVENTS.NEW_BET_ERROR, error);

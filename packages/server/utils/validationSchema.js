@@ -18,7 +18,7 @@ module.exports.PAGINATION_VALID_SCHEMA = yup.object().shape({
     .required(OFFSET.REQUIRED)
 });
 
-const TEAM_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{2,27}$/);
+const TEAM_SCHEMA = yup.string().matches(/^[A-Za-z0-9\s]{2,18}$/);
 
 module.exports.NEW_BET_VALID_SCHEMA = yup.object().shape({
   ip: yup.string().required(),

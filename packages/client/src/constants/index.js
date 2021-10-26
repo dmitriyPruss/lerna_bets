@@ -10,6 +10,7 @@ const CONSTANTS = {
       }
     }
   },
+  SOCKET_IO_URI: 'ws://localhost:5000',
   SOCKET_EVENTS: {
     NEW_BET: 'NEW_BET',
     NEW_BET_ERROR: 'NEW_BET_ERROR'

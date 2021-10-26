@@ -12,10 +12,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      userAgent: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       team: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       betValue: {
         type: Sequelize.INTEGER,

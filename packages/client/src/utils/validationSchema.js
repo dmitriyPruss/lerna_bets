@@ -11,6 +11,6 @@ export const INPUT_SCHEMA = yup.object({
   team: yup
     .string()
     .min(2, TEAM.MIN)
-    .max(27, TEAM.MAX)
+    .max(18, TEAM.MAX)
     .required(TEAM.REQUIRED)
 });
