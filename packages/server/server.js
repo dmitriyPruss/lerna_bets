@@ -20,6 +20,11 @@ io.on('connection', socket => {
   socket.on(SOCKET_EVENTS.NEW_BET, value => {
     try {
       value.userAgent = socket.handshake.headers['user-agent'];
+
+      /***
+       * присваиваем свойству newBetInstance объекта app.locals значение value для того,
+       * чтобы его можно было "видеть" в betControllers - функции createBet
+       */
       app.locals.newBetInstance = value;
     } catch (error) {
       io.emit(SOCKET_EVENTS.NEW_BET_ERROR, error);

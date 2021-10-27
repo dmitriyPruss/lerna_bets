@@ -25,11 +25,11 @@ function betsReducer (state = initialState, action) {
     // SUCCESS
     case ACTION_TYPES.GET_BETS_SUCCESS: {
       const { bets } = action;
-      return {
-        ...state,
-        isFetching: false,
-        bets: bets
-      };
+
+      return produce(state, draftState => {
+        draftState.bets = bets;
+        draftState.isFetching = false;
+      });
     }
 
     case ACTION_TYPES.CREATE_BET_SUCCESS: {
@@ -38,11 +38,10 @@ function betsReducer (state = initialState, action) {
 
       const newBets = [...bets, newBet];
 
-      return {
-        ...state,
-        bets: newBets,
-        isFetching: false
-      };
+      return produce(state, draftState => {
+        draftState.bets = newBets;
+        draftState.isFetching = false;
+      });
     }
 
     case ACTION_TYPES.UPDATE_BET_SUCCESS: {
@@ -57,11 +56,10 @@ function betsReducer (state = initialState, action) {
         bet
       );
 
-      return {
-        ...state,
-        isFetching: false,
-        bets: newBets
-      };
+      return produce(state, draftState => {
+        draftState.bets = newBets;
+        draftState.isFetching = false;
+      });
     }
 
     case ACTION_TYPES.DELETE_BET_SUCCESS: {
@@ -75,11 +73,10 @@ function betsReducer (state = initialState, action) {
         1
       );
 
-      return {
-        ...state,
-        isFetching: false,
-        bets: newBets
-      };
+      return produce(state, draftState => {
+        draftState.bets = newBets;
+        draftState.isFetching = false;
+      });
     }
 
     // ERROR

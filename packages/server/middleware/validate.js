@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const {
   NEW_BET_VALID_SCHEMA,
   CHANGED_BET_VALID_SCHEMA
@@ -6,7 +5,7 @@ const {
 const { createErr422 } = require('./../errorCreators');
 
 module.exports.validateNewBet = async (req, res, next) => {
-  if (_.isEmpty(req.body)) {
+  if (Object.keys(req.body).length === 0 && req.body.constructor === Object) {
     return next();
   }
 

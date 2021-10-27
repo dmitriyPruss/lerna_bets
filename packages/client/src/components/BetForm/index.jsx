@@ -40,7 +40,7 @@ function BetForm (props) {
                 <option value={5000}>5000</option>
               </Field>
               <Button
-                variant={theme ? 'outline-primary' : 'outline-light'}
+                variant={'outline-light'}
                 as='input'
                 type='submit'
                 value='Add Bet'

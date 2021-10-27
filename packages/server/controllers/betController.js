@@ -3,6 +3,11 @@ const { Bet } = require('../models');
 const { PAGINATION } = require('../constants');
 const { createErr404 } = require('../errorCreators');
 
+/***
+ *  Две ветки отработки getBets:
+ *  1. Для httpRequests с пагинацией через req.ruery
+ *  2. Для рендеринга на реакте
+ */
 module.exports.getBets = async (req, res, next) => {
   const {
     pagination: { limit, offset },
@@ -13,9 +18,7 @@ module.exports.getBets = async (req, res, next) => {
     if (emptyQuery) {
       const foundRenderBets = await Bet.findAll({
         raw: true,
-        attributes: {
-          exclude: ['createdAt', 'updatedAt']
-        },
+        attributes: ['id', 'team', 'betValue', 'isWinned', 'createdAt'],
         limit: PAGINATION.LIMIT_RENDER_DEFAULT,
         offset: PAGINATION.OFFSET_DEFAULT,
         order: [['createdAt', 'DESC']]
@@ -39,15 +42,18 @@ module.exports.getBets = async (req, res, next) => {
   }
 };
 
+/***
+ *  Две ветки отработки createBet:
+ *  1. Для httpRequests с данными req.body
+ *  2. Для рендеринга на реакте (пустой обьект req.body) - с использованием socket.io
+ */
 module.exports.createBet = async (req, res, next) => {
   const { body, ip } = req;
   const {
     app: {
-      locals: { newBetInstance }
+      locals: { io, newBetInstance }
     }
   } = req;
-
-  const io = req.app.locals.io;
 
   try {
     if (!_.isEmpty(req.body)) {
@@ -60,7 +66,14 @@ module.exports.createBet = async (req, res, next) => {
 
     newBetInstance.ip = ip;
     const createdBet = await Bet.create(newBetInstance);
-    const sendedBet = _.omit(createdBet.get(), ['updatedAt']);
+    const sendedBet = _.pick(createdBet.get(), [
+      'id',
+      'team',
+      'betValue',
+      'isWinned',
+      'createdAt'
+    ]);
+
     return io.emit('NEW_BET', sendedBet);
   } catch (error) {
     next(error);
@@ -83,7 +96,7 @@ module.exports.changeBet = async (req, res, next) => {
     });
 
     if (updatedBetCount > 0) {
-      const changedBet = _.omit(updatedBet.get(), ['createdAt', 'updatedAt']);
+      const changedBet = _.omit(updatedBet.get(), ['ip', 'userAgent']);
       return res.status(200).send({ data: changedBet });
     }
     next(createErr404);

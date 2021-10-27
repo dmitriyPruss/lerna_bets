@@ -29,7 +29,7 @@
   border-radius: 20px 20px 0px 0px;
   background: radial-gradient(
     circle at 50% 30%,
-    rgb(194, 235, 248),
+    rgb(91, 167, 194),
     rgb(19, 101, 116)
   );
   box-shadow: inset rgba(0, 0, 0, 0.6) 0 -3px 8px,
@@ -81,6 +81,7 @@
   @media screen and (max-width: 800px) {
     width: 97%;
   }
+
   @media screen and (max-width: 680px) {
     font-size: 14px;
     width: 98%;
@@ -88,7 +89,7 @@
 }
 
 .inputData {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   position: relative;
   width: 55%;
   display: flex;
@@ -100,7 +101,12 @@
 
   @media screen and (max-width: 850px) {
     flex-direction: column;
-    width: 85%;
+    width: 75%;
+
+    & > *:last-child {
+      width: 50%;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -109,7 +115,7 @@
 
   @media screen and (max-width: 850px) {
     width: 50%;
-    margin: 0 auto 30px;
+    margin: 0 auto 10px;
   }
 }
 
@@ -170,6 +176,7 @@
     width: 62%;
     margin-left: 80px;
   }
+
   & > div:nth-child(even) {
     width: 35%;
     margin-left: 120px;
@@ -186,6 +193,7 @@
     & > div:first-child {
       margin: 0px;
     }
+
     & > div:nth-child(even) {
       margin-left: 100px;
     }
@@ -200,6 +208,7 @@
       margin: 0px;
       width: 98%;
     }
+
     & > div:nth-child(even) {
       margin: 0px;
       width: 98%;
