@@ -1,6 +1,9 @@
 const _ = require('lodash');
 const { Bet } = require('../models');
-const { PAGINATION } = require('../constants');
+const {
+  PAGINATION,
+  SOCKET_EVENTS: { NEW_BET }
+} = require('../constants');
 const { createErr404 } = require('../errorCreators');
 
 /***
@@ -48,12 +51,16 @@ module.exports.getBets = async (req, res, next) => {
  *  2. Для рендеринга на реакте (пустой обьект req.body) - с использованием socket.io
  */
 module.exports.createBet = async (req, res, next) => {
-  const { body, ip } = req;
   const {
+    app,
+    body,
+    ip,
     app: {
-      locals: { io, newBetInstance }
+      locals: { newBetInstance }
     }
   } = req;
+
+  const io = app.get('io');
 
   try {
     if (!_.isEmpty(req.body)) {
@@ -74,7 +81,7 @@ module.exports.createBet = async (req, res, next) => {
       'createdAt'
     ]);
 
-    return io.emit('NEW_BET', sendedBet);
+    return io.emit(NEW_BET.NAME, sendedBet);
   } catch (error) {
     next(error);
   }

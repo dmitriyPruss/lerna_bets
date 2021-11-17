@@ -28,6 +28,7 @@ export const createBet = bet => {
   socket.emit(SOCKET_EVENTS.NEW_BET, bet);
   return apiInstance.post('/bets', {});
 };
+
 socket.on(SOCKET_EVENTS.NEW_BET, newBet => {
   store.dispatch(createBetSuccess(newBet));
 });

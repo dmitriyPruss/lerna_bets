@@ -1,40 +1,19 @@
 const http = require('http');
 const { Server } = require('socket.io');
+
 const app = require('./app');
-const {
-  PORT_DEFAULT,
-  CORS_ORIGIN_DEFAULT,
-  SOCKET_EVENTS
-} = require('./constants');
+const { PORT_DEFAULT, CORS_ORIGIN_DEFAULT } = require('./constants');
+const { newBetHandler } = require('./socketHandlers');
+
 // require('./models');
 
 const httpServer = http.createServer(app);
 const ioSets = { cors: { origin: CORS_ORIGIN_DEFAULT } };
 const io = new Server(httpServer, ioSets);
 
-app.locals.io = io;
+app.set('io', io);
 
-io.on('connection', socket => {
-  console.log(`socket.connected`, socket.connected);
-
-  socket.on(SOCKET_EVENTS.NEW_BET, value => {
-    try {
-      value.userAgent = socket.handshake.headers['user-agent'];
-
-      /***
-       * присваиваем свойству newBetInstance объекта app.locals значение value для того,
-       * чтобы его можно было "видеть" в betControllers - функции createBet
-       */
-      app.locals.newBetInstance = value;
-    } catch (error) {
-      io.emit(SOCKET_EVENTS.NEW_BET_ERROR, error);
-    }
-  });
-
-  socket.on('disconnect', () => {
-    console.log('client is disconnected');
-  });
-});
+io.on('connection', socket => newBetHandler(socket, app));
 
 const PORT = process.env.PORT ?? PORT_DEFAULT;
 
